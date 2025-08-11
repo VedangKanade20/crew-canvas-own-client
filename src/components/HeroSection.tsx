@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function HeroSection() {
     return (
         <section className="relative flex flex-col items-center justify-center min-h-screen bg-[#111014] text-white px-4">
@@ -7,6 +9,7 @@ export default function HeroSection() {
                     Collaboration Reimagined
                 </span>
             </div>
+
             {/* Headline */}
             <h1 className="text-5xl md:text-6xl font-extrabold text-center bg-gradient-to-r from-[#B983FF] to-[#FF5EDB] text-transparent bg-clip-text mb-4">
                 Where Teams Create,
@@ -15,12 +18,14 @@ export default function HeroSection() {
                 <br />
                 Together
             </h1>
+
             {/* Subtitle */}
             <p className="text-lg md:text-xl text-gray-300 text-center max-w-2xl mb-10">
                 CollabSpace brings your teams ideas to life with real-time
                 collaboration tools, interactive whiteboards, voice calling, and
                 project management—all in one seamless workspace.
             </p>
+
             {/* Buttons */}
             <div className="flex gap-4">
                 <button className="bg-[#B983FF] hover:bg-[#a16ee6] text-white px-8 py-3 rounded-lg font-semibold transition">
@@ -30,7 +35,17 @@ export default function HeroSection() {
                     Watch demo
                 </button>
             </div>
-            {/* Decorative icons can be added here as absolutely positioned elements */}
+
+            {/* Image */}
+            {/* <div className="relative w-full max-w-5xl aspect-video mt-5 mb-1">
+                <Image
+                    src="/ss.png"
+                    alt="Collaboration platform preview"
+                    fill
+                    className="rounded-lg object-cover"
+                    priority
+                />
+            </div> */}
         </section>
     );
 }

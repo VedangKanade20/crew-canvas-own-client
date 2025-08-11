@@ -3,83 +3,28 @@ import React from "react";
 
 const Header: React.FC = () => {
     return (
-        <header
-            style={{
-                background: "transparent",
-                color: "#fff",
-                width: "100%",
-                position: "fixed",
-                top: 0,
-                left: 0,
-                zIndex: 100,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                padding: "0.5rem 2rem",
-                height: "64px",
-            }}
-        >
+        <header className="fixed top-0 left-0 z-[100] w-full flex items-center justify-between px-8 py-2 h-16 bg-transparent text-white m-">
             {/* Logo */}
-            <div style={{ display: "flex", alignItems: "center" }}>
-                <span
-                    style={{
-                        fontWeight: 600,
-                        fontSize: "2rem",
-                        color: "#a259ff",
-                        fontFamily: "inherit",
-                        textShadow: "0 0 16px #a259ff44",
-                        letterSpacing: "0.5px",
-                    }}
-                >
+            <div className="flex items-center">
+                <span className="font-semibold text-2xl text-[#a259ff] tracking-[0.5px] [text-shadow:0_0_16px_#a259ff44]">
                     Crew-Canvas
                 </span>
             </div>
 
             {/* Right Side */}
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <div className="flex items-center gap-4">
                 {/* Log in Button */}
-                <button
-                    style={{
-                        background: "none",
-                        border: "1px solid #444",
-                        color: "#fff",
-                        borderRadius: "8px",
-                        padding: "0.5rem 1.2rem",
-                        fontSize: "1rem",
-                        cursor: "pointer",
-                        marginRight: "0.5rem",
-                    }}
-                >
+                <button className="bg-transparent border border-[#444] text-white rounded-lg px-5 py-2 text-base cursor-pointer mr-2">
                     Log in
                 </button>
 
                 {/* Sign up Button */}
-                <button
-                    style={{
-                        background: "#a259ff",
-                        color: "#fff",
-                        border: "none",
-                        borderRadius: "8px",
-                        padding: "0.5rem 1.2rem",
-                        fontSize: "1rem",
-                        fontWeight: 600,
-                        cursor: "pointer",
-                        boxShadow: "0 0 8px #a259ff55",
-                        marginRight: "0.5rem",
-                    }}
-                >
+                <button className="bg-[#a259ff] text-white rounded-lg px-5 py-2 text-base font-semibold cursor-pointer shadow-[0_0_8px_#a259ff55] mr-2">
                     Sign up free
                 </button>
 
                 {/* Document Icon */}
-                <span
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginLeft: "0.5rem",
-                        filter: "drop-shadow(0 0 8px #00ff8877)",
-                    }}
-                >
+                <span className="flex items-center ml-2 drop-shadow-[0_0_8px_#00ff8877]">
                     <svg
                         width="28"
                         height="28"
