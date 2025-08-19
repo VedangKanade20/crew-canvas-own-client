@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { FaGithub, FaTwitter } from "react-icons/fa";
 
 export default function SignUpPage() {
     const [fullName, setFullName] = useState("John Doe");
@@ -40,11 +39,6 @@ export default function SignUpPage() {
         } finally {
             setIsLoading(false);
         }
-    };
-
-    const handleSocialAuth = (provider: string) => {
-        console.log(`${provider} authentication`);
-        // Implement social authentication logic
     };
 
     return (
@@ -167,62 +161,6 @@ export default function SignUpPage() {
                                 : "Create account"}
                         </button>
                     </form>
-
-                    {/* Social Login */}
-                    <div className="mt-6">
-                        <div className="relative">
-                            <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-gray-600" />
-                            </div>
-                            <div className="relative flex justify-center text-sm">
-                                <span className="px-2 bg-gray-800 text-gray-400">
-                                    OR CONTINUE WITH
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="mt-6 grid grid-cols-2 gap-3">
-                            <button
-                                onClick={() => handleSocialAuth("GitHub")}
-                                disabled={isLoading}
-                                className="w-full inline-flex justify-center items-center px-4 py-3 border border-gray-600 rounded-lg bg-gray-700 text-white hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200"
-                            >
-                                <FaGithub className="w-5 h-5 mr-2" />
-                                GitHub
-                            </button>
-                            <button
-                                onClick={() => handleSocialAuth("Twitter")}
-                                disabled={isLoading}
-                                className="w-full inline-flex justify-center items-center px-4 py-3 border border-gray-600 rounded-lg bg-gray-700 text-white hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition duration-200"
-                            >
-                                <FaTwitter className="w-5 h-5 mr-2" />
-                                Twitter
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Sign In Link */}
-                    <div className="mt-6 text-center">
-                        <p className="text-gray-400">
-                            Already have an account?{" "}
-                            <Link
-                                href="/login"
-                                className="text-purple-400 hover:text-purple-300 font-medium transition duration-200"
-                            >
-                                Sign in
-                            </Link>
-                        </p>
-                    </div>
-
-                    {/* Demo Notice */}
-                    <div className="mt-6 p-4 bg-gray-700 rounded-lg">
-                        <p className="text-sm text-gray-300 mb-1">
-                            Just click Create account to continue:
-                        </p>
-                        <p className="text-sm text-gray-400">
-                            No authentication required - this is a demo
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
