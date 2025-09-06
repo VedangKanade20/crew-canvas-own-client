@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroSection() {
     return (
@@ -21,31 +22,24 @@ export default function HeroSection() {
 
             {/* Subtitle */}
             <p className="text-lg md:text-xl text-gray-300 text-center max-w-2xl mb-10">
-                CollabSpace brings your teams ideas to life with real-time
+                Crew-Canvas brings your teams ideas to life with real-time
                 collaboration tools, interactive whiteboards, voice calling, and
                 project management—all in one seamless workspace.
             </p>
 
             {/* Buttons */}
             <div className="flex gap-4">
-                <button className="bg-[#B983FF] hover:bg-[#a16ee6] text-white px-8 py-3 rounded-lg font-semibold transition">
-                    Start for free <span aria-hidden>→</span>
-                </button>
-                <button className="bg-black bg-opacity-10 hover:bg-opacity-20 text-white px-8 py-3 rounded-lg font-semibold transition border border-white border-opacity-20">
-                    Watch demo
-                </button>
+                <Link href={"/signup"}>
+                    <button className="bg-[#B983FF] hover:bg-[#a16ee6] text-white px-8 py-3 rounded-lg font-semibold transition">
+                        Start for free <span aria-hidden>→</span>
+                    </button>
+                </Link>
+                <Link href={"/dashboard"}>
+                    <button className="bg-black bg-opacity-10 hover:bg-opacity-20 text-white px-8 py-3 rounded-lg font-semibold transition border border-white border-opacity-20">
+                        Explore the app
+                    </button>
+                </Link>
             </div>
-
-            {/* Image */}
-            {/* <div className="relative w-full max-w-5xl aspect-video mt-5 mb-1">
-                <Image
-                    src="/ss.png"
-                    alt="Collaboration platform preview"
-                    fill
-                    className="rounded-lg object-cover"
-                    priority
-                />
-            </div> */}
         </section>
     );
 }

@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 const features = [
     {
@@ -130,6 +132,10 @@ const features = [
 ];
 
 export default function Features() {
+    const [selectedFeature, setSelectedFeature] = useState<
+        null | (typeof features)[0]
+    >(null);
+
     return (
         <section className="bg-[#111113] text-white py-20 px-4 md:px-12">
             <div className="max-w-7xl mx-auto">
@@ -141,11 +147,12 @@ export default function Features() {
                     seamless platform, helping your team work together more
                     effectively.
                 </p>
+
                 <div className="grid gap-12 md:grid-cols-2">
-                    {features.map((f, i) => (
+                    {features.map((f) => (
                         <div
                             key={f.title}
-                            className="flex flex-col md:flex-row items-start gap-6 bg-transparent rounded-2xl p-8 shadow-lg shadow-purple-900/30 transition-shadow border-radius-purple"
+                            className="flex flex-col md:flex-row items-start gap-6 bg-transparent rounded-2xl p-8 shadow-lg shadow-purple-900/30 transition-shadow"
                         >
                             <div>{f.icon}</div>
                             <div>
@@ -155,10 +162,10 @@ export default function Features() {
                                 <p className="text-gray-300 mb-2">
                                     {f.description}
                                 </p>
-                                <p className="text-gray-400 text-sm">
-                                    {f.details}
-                                </p>
-                                <button className="mt-4 px-4 py-2 rounded-lg border border-gray-700 text-gray-200 hover:bg-purple-900/30 transition">
+                                <button
+                                    onClick={() => setSelectedFeature(f)}
+                                    className="mt-4 px-4 py-2 rounded-lg border border-gray-700 text-gray-200 hover:bg-purple-900/30 transition"
+                                >
                                     Learn more
                                 </button>
                             </div>
@@ -166,6 +173,32 @@ export default function Features() {
                     ))}
                 </div>
             </div>
+
+            {/* Modal */}
+            {selectedFeature && (
+                <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+                    <div className="bg-[#1c1c1f] p-8 rounded-2xl max-w-lg w-full shadow-xl relative">
+                        <button
+                            onClick={() => setSelectedFeature(null)}
+                            className="absolute top-3 right-3 text-gray-400 hover:text-white text-xl"
+                        >
+                            ✕
+                        </button>
+                        <div className="flex items-center gap-4 mb-4">
+                            {selectedFeature.icon}
+                            <h3 className="text-2xl font-bold text-white">
+                                {selectedFeature.title}
+                            </h3>
+                        </div>
+                        <p className="text-gray-300 mb-4">
+                            {selectedFeature.description}
+                        </p>
+                        <p className="text-gray-400 text-sm">
+                            {selectedFeature.details}
+                        </p>
+                    </div>
+                </div>
+            )}
         </section>
     );
 }
