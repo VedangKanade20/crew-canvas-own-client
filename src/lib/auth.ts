@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import API from "./axios";
+import API from "./api";
 
 export interface SignInFormData {
     email: string;
