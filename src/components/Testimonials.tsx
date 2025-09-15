@@ -6,7 +6,7 @@ const testimonials = [
         name: "Aarav Mehta",
         role: "Project Lead",
         feedback:
-            "CollabSpace has transformed how our team works together. It's intuitive, efficient, and keeps everyone on the same page.",
+            "Crew-Canvas has transformed how our team works together. It's intuitive, efficient, and keeps everyone on the same page.",
         avatar: "AM",
     },
     {
@@ -20,7 +20,7 @@ const testimonials = [
         name: "Rohan Sharma",
         role: "Developer",
         feedback:
-            "I love the simplicity and speed of CollabSpace. It’s perfect for agile teams working on fast-moving projects.",
+            "I love the simplicity and speed of Crew-Canvas. It’s perfect for agile teams working on fast-moving projects.",
         avatar: "RS",
     },
     {

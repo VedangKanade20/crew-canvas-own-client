@@ -19,7 +19,10 @@ const LoginForm = () => {
         setLoading(true);
 
         try {
-            const response = await api.post("api/auth/login", { email, password });
+            const response = await api.post("api/auth/login", {
+                email,
+                password,
+            });
             setUser(response.data.user);
             toast.success("Login successful!");
             router.push("/dashboard");
@@ -39,7 +42,7 @@ const LoginForm = () => {
                         Welcome back
                     </h1>
                     <p className="text-gray-400">
-                        Sign in to your CollabSpace account
+                        Sign in to your Crew-Canvas account
                     </p>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-6">

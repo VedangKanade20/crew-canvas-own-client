@@ -57,7 +57,7 @@ function SignupForm() {
                         Create an account
                     </h1>
                     <p className="text-gray-400">
-                        Join CollabSpace and start collaborating
+                        Join Crew-Canvas and start collaborating
                     </p>
                 </div>
 

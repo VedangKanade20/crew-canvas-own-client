@@ -9,7 +9,7 @@ export default function CTA() {
                 </h2>
                 <p className="mt-4 text-gray-400">
                     Join thousands of teams already using{" "}
-                    <span className="text-white">CollabSpace</span> to
+                    <span className="text-white">Crew-Canvas</span> to
                     collaborate more effectively and bring their ideas to life.
                 </p>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
