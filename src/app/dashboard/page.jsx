@@ -47,17 +47,17 @@ const DUMMY_TEAMSPACES = [
 const DashboardPage = () => {
     const { user } = useAuth();
     const [searchQuery, setSearchQuery] = useState("");
-
+    console.log(user);
     const filteredTeamspaces = DUMMY_TEAMSPACES.filter((space) =>
         space.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
         <>
-            <div className="flex">
+            <div className="flex bg-black">
                 <Sidebar />
-                <div className="flex-1  bg-black text-white min-h-screen ">
-                    <div className="max-w-7xl mx-auto mt-10 pl-30">
+                <div className="flex-1 p-8 text-white min-h-screen">
+                    <div className="w-[100%] mx-auto mt-[5%] pl-[20%]">
                         {/* Welcome Section */}
                         <div className="mb-10">
                             <h1 className="text-3xl font-bold text-purple-500 mb-4">

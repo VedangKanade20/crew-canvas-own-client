@@ -29,6 +29,6 @@
         ".next/types/**/*.ts",
         "src/context/AuthContext.jsx",
         "src/app/login/page.jsx"
-, "src/app/signup/page.jsx", "src/app/dashboard/page.jsx"    ],
+, "src/app/signup/page.jsx", "src/app/dashboard/page.jsx", "src/components/Header.jsx", "src/providers/AppProvider.jsx", "src/store/store.js"    ],
     "exclude": ["node_modules"]
 }

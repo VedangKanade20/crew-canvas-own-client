@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 const Sidebar = () => {
     const pathname = usePathname();
@@ -10,12 +11,16 @@ const Sidebar = () => {
     const { logout } = useAuth();
 
     const handleLogout = async () => {
-        await logout();
-        router.push("/login");
+        try {
+            await logout();
+            router.push("/login");
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
     };
 
     return (
-        <div className="fixed top-16 left-0 h-[calc(100vh-64px)] w-64 bg-black text-white p-6 flex flex-col justify-between border-r border-gray-800">
+        <div className="fixed top-0 left-0 h-screen w-64 bg-black text-white p-6 flex flex-col justify-between border-r border-gray-800">
             <div>
                 <nav className="space-y-1">
                     <Link
@@ -28,9 +33,6 @@ const Sidebar = () => {
                     >
                         <span className="mr-3">🏠</span>
                         <span className="flex-1">Dashboard</span>
-                        {pathname === "/dashboard" && (
-                            <span className="w-1 h-5 bg-purple-400 rounded-full"></span>
-                        )}
                     </Link>
                     <Link
                         href="/all-team-spaces"
@@ -42,9 +44,6 @@ const Sidebar = () => {
                     >
                         <span className="mr-3">👥</span>
                         <span className="flex-1">All Team Spaces</span>
-                        {pathname === "/all-team-spaces" && (
-                            <span className="w-1 h-5 bg-purple-400 rounded-full"></span>
-                        )}
                     </Link>
                     <Link
                         href="/new-team-space"
@@ -56,9 +55,6 @@ const Sidebar = () => {
                     >
                         <span className="mr-3">➕</span>
                         <span className="flex-1">New Team Space</span>
-                        {pathname === "/new-team-space" && (
-                            <span className="w-1 h-5 bg-purple-400 rounded-full"></span>
-                        )}
                     </Link>
                     <Link
                         href="/settings"
@@ -70,9 +66,6 @@ const Sidebar = () => {
                     >
                         <span className="mr-3">⚙️</span>
                         <span className="flex-1">Settings</span>
-                        {pathname === "/settings" && (
-                            <span className="w-1 h-5 bg-purple-400 rounded-full"></span>
-                        )}
                     </Link>
                     <Link
                         href="/help"
@@ -84,9 +77,6 @@ const Sidebar = () => {
                     >
                         <span className="mr-3">❓</span>
                         <span className="flex-1">Help & Support</span>
-                        {pathname === "/help" && (
-                            <span className="w-1 h-5 bg-purple-400 rounded-full"></span>
-                        )}
                     </Link>
                     <Link
                         href="/contact"
@@ -98,9 +88,6 @@ const Sidebar = () => {
                     >
                         <span className="mr-3">📞</span>
                         <span className="flex-1">Contact Support</span>
-                        {pathname === "/contact" && (
-                            <span className="w-1 h-5 bg-purple-400 rounded-full"></span>
-                        )}
                     </Link>
                 </nav>
             </div>
