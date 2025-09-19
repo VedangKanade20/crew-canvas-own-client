@@ -1,0 +1,8 @@
+src/
+ ┣ app/                # next.js app routes
+ ┣ components/         # UI components
+ ┣ context/            # React contexts
+ ┣ hooks/              # TanStack Query hooks
+ ┣ lib/                # axios instance, utils
+ ┣ providers/          # AuthProvider, QueryProvider, etc
+ ┣ services/           # API services (Axios calls)
