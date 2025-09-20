@@ -31,7 +31,6 @@ export function useGetTeamspace(teamspaceId) {
 // Add Member
 export function useAddMember(teamspaceId) {
     const queryClient = useQueryClient();
-
     return useMutation({
         mutationFn: (memberId) => addMember(teamspaceId, memberId),
         onSuccess: () => {
