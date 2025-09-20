@@ -1,24 +1,24 @@
-// app/dashboard/components/TeamspaceList.js
 "use client";
-import { useTeamspaces } from "@/hooks/useTeamspaces";
+import { useGetTeamspace } from "@/hooks/useTeamspace";
 
 export default function TeamspaceList() {
-    const { data: teamspaces, isLoading, error } = useTeamspaces();
+    const { data, isLoading, isError } = useGetTeamspace();
 
     if (isLoading) return <p>Loading teamspaces...</p>;
-    if (error) return <p>Error loading teamspaces</p>;
+    if (isError)
+        return <p className="text-red-500">Error fetching teamspaces</p>;
 
     return (
-        <div className="w-[45%] mx-auto space-y-4">
-            {teamspaces?.map((team) => (
+        <div className="space-y-4 w-[45%]">
+            {data?.map((space) => (
                 <div
-                    key={team._id}
-                    className="p-4 bg-gray-800 rounded-xl shadow-md text-white"
+                    key={space._id}
+                    className="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-lg transition"
                 >
-                    <h2 className="font-bold">{team.name}</h2>
-                    <p className="text-sm text-gray-400">
-                        Members: {team.members.length}
-                    </p>
+                    <h3 className="text-xl font-semibold text-purple-400">
+                        {space.name}
+                    </h3>
+                    <p className="text-gray-400">{space.description}</p>
                 </div>
             ))}
         </div>

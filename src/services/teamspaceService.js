@@ -1,6 +1,6 @@
 import api from "@/lib/api";
 
-export const getTeamspaces = async () => {
+export const getTeamspace = async () => {
     const res = await api.get("/teamspaces");
     return res.data;
 };
