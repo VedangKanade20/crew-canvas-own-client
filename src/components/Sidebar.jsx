@@ -20,86 +20,59 @@ const Sidebar = () => {
     };
 
     return (
-        <div className="fixed top-0 left-0 h-screen w-64 bg-black text-white p-6 flex flex-col justify-between border-r border-gray-800">
+        <div className="fixed top-0 left-0 h-screen w-64 bg-gray-900/95 backdrop-blur-md text-white p-6 flex flex-col justify-between border-r border-gray-800/50 shadow-lg">
             <div>
-                <nav className="space-y-1">
-                    <Link
-                        href="/dashboard"
-                        className={`flex items-center p-2 rounded-lg ${
-                            pathname === "/dashboard"
-                                ? "bg-gray-800 text-purple-400"
-                                : "hover:bg-gray-800"
-                        }`}
-                    >
-                        <span className="mr-3">🏠</span>
-                        <span className="flex-1">Dashboard</span>
-                    </Link>
-                    <Link
-                        href="/all-team-spaces"
-                        className={`flex items-center p-2 rounded-lg ${
-                            pathname === "/all-team-spaces"
-                                ? "bg-gray-800 text-purple-400"
-                                : "hover:bg-gray-800"
-                        }`}
-                    >
-                        <span className="mr-3">👥</span>
-                        <span className="flex-1">All Team Spaces</span>
-                    </Link>
-                    <Link
-                        href="/new-team-space"
-                        className={`flex items-center p-2 rounded-lg ${
-                            pathname === "/new-team-space"
-                                ? "bg-gray-800 text-purple-400"
-                                : "hover:bg-gray-800"
-                        }`}
-                    >
-                        <span className="mr-3">➕</span>
-                        <span className="flex-1">New Team Space</span>
-                    </Link>
-                    <Link
-                        href="/settings"
-                        className={`flex items-center p-2 rounded-lg ${
-                            pathname === "/settings"
-                                ? "bg-gray-800 text-purple-400"
-                                : "hover:bg-gray-800"
-                        }`}
-                    >
-                        <span className="mr-3">⚙️</span>
-                        <span className="flex-1">Settings</span>
-                    </Link>
-                    <Link
-                        href="/help"
-                        className={`flex items-center p-2 rounded-lg ${
-                            pathname === "/help"
-                                ? "bg-gray-800 text-purple-400"
-                                : "hover:bg-gray-800"
-                        }`}
-                    >
-                        <span className="mr-3">❓</span>
-                        <span className="flex-1">Help & Support</span>
-                    </Link>
-                    <Link
-                        href="/contact"
-                        className={`flex items-center p-2 rounded-lg ${
-                            pathname === "/contact"
-                                ? "bg-gray-800 text-purple-400"
-                                : "hover:bg-gray-800"
-                        }`}
-                    >
-                        <span className="mr-3">📞</span>
-                        <span className="flex-1">Contact Support</span>
-                    </Link>
+                <div className="mb-8 text-2xl font-bold text-purple-400">
+                    Crew-Canvas
+                </div>
+                <nav className="space-y-2">
+                    {[
+                        { href: "/dashboard", icon: "🏠", label: "Dashboard" },
+                        {
+                            href: "/all-team-spaces",
+                            icon: "👥",
+                            label: "All Team Spaces",
+                        },
+                        {
+                            href: "/new-team-space",
+                            icon: "➕",
+                            label: "New Team Space",
+                        },
+                        { href: "/settings", icon: "⚙️", label: "Settings" },
+                        { href: "/help", icon: "❓", label: "Help & Support" },
+                        {
+                            href: "/contact",
+                            icon: "📞",
+                            label: "Contact Support",
+                        },
+                    ].map((item) => (
+                        <Link
+                            key={item.href}
+                            href={item.href}
+                            className={`flex items-center p-3 rounded-xl transition-all duration-300 ${
+                                pathname === item.href
+                                    ? "bg-gray-800/50 text-purple-400 shadow-md border border-purple-500/50"
+                                    : "hover:bg-gray-800/50 hover:text-purple-300 hover:border hover:border-gray-700/50"
+                            }`}
+                        >
+                            <span className="mr-3 text-lg">{item.icon}</span>
+                            <span className="flex-1">{item.label}</span>
+                        </Link>
+                    ))}
                 </nav>
             </div>
             <div className="text-gray-500 text-xs">
-                © {new Date().getFullYear()} Crew-Canvas
+                <div className="mb-4">
+                    © {new Date().getFullYear()} Crew-Canvas
+                </div>
                 <button
                     onClick={handleLogout}
-                    className="mt-4 w-full text-left p-2 rounded-lg hover:bg-gray-800 text-red-400"
+                    className="w-full text-left p-3 rounded-xl bg-red-600/10 text-red-400 hover:bg-red-600/20 hover:text-red-300 transition-all duration-300 border border-red-500/50"
                 >
                     Logout
                 </button>
             </div>
+            <Toaster />
         </div>
     );
 };

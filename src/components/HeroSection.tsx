@@ -1,10 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function HeroSection() {
     return (
-        <section className="relative flex flex-col items-center justify-center min-h-screen bg-[#111014] text-white px-4">
+        <section className="relative flex flex-col items-center justify-center h-[60%] bg-[#111014] text-white px-4 mt-10">
             {/* Badge */}
+
             <div className="mb-6">
                 <span className="bg-[#6C3EF6] bg-opacity-20 text-[#d8cbe8] px-4 py-2 rounded-full text-sm font-medium">
                     Collaboration Reimagined

@@ -1,10 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     createTeamspace,
-    getTeamspace,
     addMember,
     removeMember,
     deleteTeamspace,
+    getTeamspaceById,
+    getAllTeamspaces,
 } from "@/services/teamspaceService";
 
 // Create Teamspace
@@ -19,11 +20,18 @@ export function useCreateTeamspace() {
     });
 }
 
+export function useGetAllTeamspaces() {
+    return useQuery({
+        queryKey: ["teamspaces"],
+        queryFn: getAllTeamspaces,
+    });
+}
+
 // Get Teamspace by ID
-export function useGetTeamspace(teamspaceId) {
+export function useGetTeamspaceById(teamspaceId) {
     return useQuery({
         queryKey: ["teamspace", teamspaceId],
-        queryFn: () => getTeamspace(teamspaceId),
+        queryFn: () => getTeamspaceById(teamspaceId),
         enabled: !!teamspaceId,
     });
 }
