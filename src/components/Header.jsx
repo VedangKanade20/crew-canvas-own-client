@@ -27,7 +27,7 @@ const Header = () => {
     };
 
     return (
-        <header className="fixed top-0 left-0 z-[100] w-full flex items-center justify-between px-8 py-2 h-[10%] bg-black text-white m-">
+        <header className="fixed top-0 left-0 z-[100] w-full flex items-center justify-between px-8 py-2 h-[10%] bg-gradient-to-br from-gray-900 via-gray-950 to-black text-white m-">
             {/* Logo */}
             <div className="flex items-center">
                 <Link href={"/"}>
