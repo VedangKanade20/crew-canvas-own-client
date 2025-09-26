@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HeroSection() {
     return (
-        <section className="relative flex flex-col items-center justify-center h-[60%] bg-[#111014] text-white px-4 mt-10">
+        <section className="relative flex flex-col items-center justify-center h-[70%] bg-[#111014] text-white px-4 mt-30 mb-5">
             {/* Badge */}
 
             <div className="mb-6">
@@ -21,7 +21,7 @@ export default function HeroSection() {
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg md:text-xl text-gray-300 text-center max-w-2xl mb-10">
+            <p className="text-lg md:text-xl text-gray-300 text-center max-w-2xl mb-10 mt-2">
                 Crew-Canvas brings your teams ideas to life with real-time
                 collaboration tools, interactive whiteboards, voice calling, and
                 project management—all in one seamless workspace.

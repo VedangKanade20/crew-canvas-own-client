@@ -140,7 +140,7 @@ export default function Features() {
         <section className="bg-[#111113] text-white py-20 px-4 md:px-12">
             <div className="max-w-7xl mx-auto">
                 <h2 className="text-4xl md:text-5xl font-bold text-center text-purple-400 mb-4">
-                    Everything you need to collaborate
+                    Everything you need to collaborate!!
                 </h2>
                 <p className="text-center text-lg text-gray-300 mb-16 max-w-2xl mx-auto">
                     Crew-Canvas combines the best collaboration tools in one
