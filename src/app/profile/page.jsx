@@ -1,6 +1,6 @@
 export default function ProfilePage() {
     return (
-        <div className="p-6 space-y-6  flex flex-col items-center p-30">
+        <div className=" space-y-6  flex flex-col items-center p-30">
             <h1 className="text-3xl font-bold">Profile</h1>
             <p className="text-gray-600">Update your profile details.</p>
 
