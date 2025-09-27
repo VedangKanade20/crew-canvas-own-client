@@ -28,7 +28,7 @@ export default function DashboardPage() {
                     {/* Teamspaces Section */}
                     <div className="mt-12">
                         <h2 className="text-xl font-semibold text-gray-200 mb-6">
-                            Your Teamspaces
+                            Your Teamspaces :
                         </h2>
                         <TeamspaceList searchQuery={searchQuery} />
                     </div>

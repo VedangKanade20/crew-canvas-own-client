@@ -2,7 +2,7 @@ import api from "@/lib/api";
 
 export const getAllTeamspaces = async () => {
     const res = await api.get("api/teamspace/get-allTeamspaces");
-    return res.data;
+    return res.data.teamspaces;
 };
 
 export const getTeamspaceById = async (teamspaceId) => {
