@@ -11,7 +11,7 @@ export default function DashboardPage() {
     const [searchQuery, setSearchQuery] = useState("");
 
     return (
-        <div className="flex min-h-screen bg-gradient-to-br from-gray-900 via-gray-950 to-black text-white mt-10 overflow-y-hidden">
+        <div className="flex min-h-screen bg-gradient-to-br from-gray-900 via-gray-950 to-black text-white mt-10 overflow-y-hidden ">
             {/* Sidebar offset handled globally in layout */}
             <div className="flex-1 p-10 ml-64">
                 <div className="max-w-7xl mx-auto">
@@ -20,6 +20,11 @@ export default function DashboardPage() {
                         user={user}
                         searchQuery={searchQuery}
                         setSearchQuery={setSearchQuery}
+                        type="text"
+                        placeholder="Search teamspaces here..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="mb-6 w-full max-w-md p-3 rounded-lg bg-gray-700 text-white"
                     />
 
                     {/* Quick Actions Section */}

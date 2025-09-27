@@ -11,7 +11,7 @@ export default function QuickActions() {
                 <p className="text-gray-400 text-sm mb-5">
                     Start a new collaborative workspace
                 </p>
-                <Link href="/dashboard/create-team-space">
+                <Link href="/dashboard/create-teamspace">
                     <button className="bg-purple-500 text-white px-5 py-2 rounded-lg hover:bg-purple-600 transition-colors w-full">
                         ➕Create Team Space
                     </button>
@@ -25,7 +25,7 @@ export default function QuickActions() {
                 <p className="text-gray-400 text-sm mb-5">
                     Join an existing workspace with a code
                 </p>
-                <Link href="/dashboard/teamspace/join-team-space">
+                <Link href="/dashboard/join-teamspace">
                     <button className="bg-purple-500 text-white px-5 py-2 rounded-lg hover:bg-purple-600 transition-colors w-full">
                         🎯Join Team Space
                     </button>

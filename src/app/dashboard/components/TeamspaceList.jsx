@@ -21,7 +21,7 @@ export default function TeamspaceList({ searchQuery }) {
 
     console.log("Filtered data:", filteredData);
     return (
-        <div className="space-y-4 w-screen max-w-2xl">
+        <div className="space-y-4 w-screen max-w-2xl ml-64 flex-col items-center">
             {filteredData.map((space) => (
                 <Link
                     href={`/teamspace/${space._id}`}
