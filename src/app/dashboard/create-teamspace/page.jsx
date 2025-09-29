@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useCreateTeamspace } from "@/hooks/useTeamspace";
+import { toast } from "react-hot-toast";
 
 export default function CreateTeamspacePage() {
     const [name, setName] = useState("");
@@ -12,6 +13,7 @@ export default function CreateTeamspacePage() {
     useEffect(() => {
         if (isSuccess) {
             router.push("/dashboard");
+            toast.success("Teamspace created successfully!"); // Assuming you have a toast notification system
         }
     }, [isSuccess, router]);
 

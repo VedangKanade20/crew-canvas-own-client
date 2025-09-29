@@ -1,14 +1,18 @@
 "use client";
-
+//add reactvtoast on joining and redirect to dashboard on success
 import { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function JoinTeamspacePage() {
     const [code, setCode] = useState("");
+    const router = useRouter();
 
     const handleJoin = (e) => {
         e.preventDefault();
-        alert(`🎯 Joining teamspace with code: ${code}`);
+        toast.success(`🎯 Joining teamspace with code: ${code}`);
         setCode("");
+        router.push("/dashboard");
     };
 
     return (
