@@ -36,6 +36,13 @@ export const deleteTeamspace = async (teamspaceId) => {
     return res.data;
 };
 
+export const joinTeamspace = async (secret) => {
+    const res = await api.post(
+        `api/teamspace/join-teamspace`,
+        { secret }
+    );
+    return res.data;
+};
 // import api from "@/lib/api";
 
 // // CREATE Teamspace

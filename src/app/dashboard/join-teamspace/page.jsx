@@ -3,14 +3,17 @@
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useJoinTeamspace } from "@/hooks/useTeamspace";
 
 export default function JoinTeamspacePage() {
     const [code, setCode] = useState("");
     const router = useRouter();
+    const { mutate: join, isLoading, isSuccess } = useJoinTeamspace();
 
     const handleJoin = (e) => {
         e.preventDefault();
-        toast.success(`🎯 Joining teamspace with code: ${code}`);
+        toast.success(`🎯 Joined TeamSpace successfully`);
+        join(code);
         setCode("");
         router.push("/dashboard");
     };

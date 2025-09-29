@@ -6,6 +6,7 @@ import {
     deleteTeamspace,
     getTeamspaceById,
     getAllTeamspaces,
+    joinTeamspace,
 } from "@/services/teamspaceService";
 
 // Create Teamspace
@@ -65,6 +66,17 @@ export function useDeleteTeamspace() {
 
     return useMutation({
         mutationFn: (teamspaceId) => deleteTeamspace(teamspaceId),
+        onSuccess: () => {
+            queryClient.invalidateQueries(["teamspaces"]);
+        },
+    });
+}
+
+export function useJoinTeamspace() {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (secret) => joinTeamspace(secret),
         onSuccess: () => {
             queryClient.invalidateQueries(["teamspaces"]);
         },
