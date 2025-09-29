@@ -24,7 +24,7 @@ export default function TeamspaceList({ searchQuery }) {
         <div className="space-y-4 w-screen max-w-2xl ml-64 flex-col items-center">
             {filteredData.map((space) => (
                 <Link
-                    href={`/teamspace/${space._id}`}
+                    href={`dashboard/teamspace/${space._id}`}
                     className="block text-white p-3 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
                 >
                     <div

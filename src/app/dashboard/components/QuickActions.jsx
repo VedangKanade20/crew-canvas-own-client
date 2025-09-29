@@ -39,7 +39,7 @@ export default function QuickActions() {
                 <p className="text-gray-400 text-sm mb-5">
                     Browse and explore your teamspaces
                 </p>
-                <Link href="/dashboard/teamspace">
+                <Link href="/dashboard/allteamspaces">
                     <button className="bg-purple-500 text-white px-5 py-2 rounded-lg hover:bg-purple-600 transition-colors w-full">
                         📂Browse Teamspaces
                     </button>
