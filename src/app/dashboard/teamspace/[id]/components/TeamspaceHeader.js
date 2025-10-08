@@ -1,10 +1,12 @@
-"use client";
-
-export default function TeamspaceHeader({ name }) {
+export default function TeamspaceHeader({ teamspace }) {
     return (
-        <header className="mb-6">
-            <h1 className="text-3xl font-bold">{name}</h1>
-            <p className="text-gray-500">Welcome to your teamspace overview</p>
-        </header>
+        <div className="mb-4">
+            <h1 className="text-3xl font-semibold">
+                Welcome to {teamspace.teamspaceName}
+            </h1>
+            <p className="text-gray-400">
+                Owner: {teamspace.OwnerId?.username || "Unknown"}
+            </p>
+        </div>
     );
 }
