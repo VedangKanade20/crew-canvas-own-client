@@ -11,7 +11,7 @@ export default function TeamspaceSidebar({ teamspaceId }) {
             <ul className="space-y-4  text-xl ml-3 flex-col">
                 <li>
                     <Link
-                        href={`/teamspace/${teamspaceId}`}
+                        href={`/dashboard/teamspace/${teamspaceId}`}
                         className="hover:text-purple-400 "
                     >
                         Overview 📊
@@ -19,7 +19,7 @@ export default function TeamspaceSidebar({ teamspaceId }) {
                 </li>
                 <li>
                     <Link
-                        href={`/teamspace/${teamspaceId}/chats`}
+                        href={`/dashboard/teamspace/${teamspaceId}/chats`}
                         className="hover:text-purple-400"
                     >
                         Chats 💬
@@ -27,7 +27,7 @@ export default function TeamspaceSidebar({ teamspaceId }) {
                 </li>
                 <li>
                     <Link
-                        href={`/teamspace/${teamspaceId}/tasks`}
+                        href={`/dashboard/teamspace/${teamspaceId}/tasks`}
                         className="hover:text-purple-400"
                     >
                         Tasks ✅
@@ -35,7 +35,7 @@ export default function TeamspaceSidebar({ teamspaceId }) {
                 </li>
                 <li>
                     <Link
-                        href={`/teamspace/${teamspaceId}/notes`}
+                        href={`/dashboard/teamspace/${teamspaceId}/notes`}
                         className="hover:text-purple-400"
                     >
                         Notes 📝
@@ -43,7 +43,7 @@ export default function TeamspaceSidebar({ teamspaceId }) {
                 </li>
                 <li>
                     <Link
-                        href={`/teamspace/${teamspaceId}/canvas`}
+                        href={`/dashboard/teamspace/${teamspaceId}/canvas`}
                         className="hover:text-purple-400"
                     >
                         Canvas 🎨
@@ -51,7 +51,7 @@ export default function TeamspaceSidebar({ teamspaceId }) {
                 </li>
                 <li>
                     <Link
-                        href={`/teamspace/${teamspaceId}/call`}
+                        href={`/dashboard/teamspace/${teamspaceId}/call`}
                         className="hover:text-purple-400"
                     >
                         Group Call 📞
