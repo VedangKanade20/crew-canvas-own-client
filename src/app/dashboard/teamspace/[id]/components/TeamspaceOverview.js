@@ -26,8 +26,10 @@ export default function TeamspaceOverview() {
                 {teamspace.members?.map((m) => (
                     <MemberCard
                         key={m._id}
-                        username={m.user?.username || "Unnamed"}
+                        username={m.user?.name || "Unnamed"}
                         role={m.role}
+                        // id={m.role == "Member" ? m._id : m.user?.email}
+                        id={m.user?._id}
                     />
                 ))}
             </div>

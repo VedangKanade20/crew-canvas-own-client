@@ -31,16 +31,13 @@ export const removeMember = async ({ teamspaceId, memberId }) => {
 
 export const deleteTeamspace = async (teamspaceId) => {
     const res = await api.delete(
-        `api/teamspace/delete-teamspace/${teamspaceId}`
+        `api/teamspace/${teamspaceId}/delete-teamspace`
     );
     return res.data;
 };
 
 export const joinTeamspace = async (secret) => {
-    const res = await api.post(
-        `api/teamspace/join-teamspace`,
-        { secret }
-    );
+    const res = await api.post(`api/teamspace/join-teamspace`, { secret });
     return res.data;
 };
 // import api from "@/lib/api";

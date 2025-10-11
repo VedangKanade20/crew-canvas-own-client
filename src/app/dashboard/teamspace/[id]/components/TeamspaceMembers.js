@@ -12,6 +12,9 @@ export default function TeamspaceMembers({ teamspace }) {
                     >
                         {m?.user?.name || "User"}{" "}
                         <span className="text-gray-500">({m?.role})</span>
+                        <span className="text-gray-500">
+                            ({m.role == "admin" ? m.user?.email : m.user?._id})
+                        </span>
                     </div>
                 ))}
             </div>
