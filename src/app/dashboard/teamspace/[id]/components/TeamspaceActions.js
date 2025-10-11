@@ -6,6 +6,7 @@ import {
     useRemoveMember,
     useDeleteTeamspace,
 } from "@/hooks/useTeamspace";
+// import Link from "next/link";
 
 export default function TeamspaceActions({ teamspace }) {
     const [showAddModal, setShowAddModal] = useState(false);
@@ -146,10 +147,17 @@ export default function TeamspaceActions({ teamspace }) {
                 </div>
             )}
 
-            <button className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded-lg">
+            <button className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded-lg w-60">
                 Leave Teamspace
             </button>
-            <button className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-lg">
+            {/* <Link
+                href={`/dashboard/teamspace/${teamspace}/members`}
+                className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded-lg w-60 text-center"
+            >
+                Teamspace Settings
+            </Link> */}
+
+            <button className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-lg w-60">
                 View All Members
             </button>
         </div>
