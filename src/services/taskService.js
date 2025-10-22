@@ -1,5 +1,5 @@
 // services/taskService.js
-import api from "./api"; // preconfigured axios instance
+import api from "@/lib/api"; 
 
 export const createTask = (teamspaceId, data) =>
     api.post(`api/teamspaces/${teamspaceId}/tasks`, data);

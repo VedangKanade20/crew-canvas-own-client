@@ -1,4 +1,4 @@
-import api from "./api"; // preconfigured axios instance
+import api from "@/lib/api";
 
 export const createNote = (teamspaceId, data) =>
     api.post(`api/teamspace/${teamspaceId}/create-note`, data);

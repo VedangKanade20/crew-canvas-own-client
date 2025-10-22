@@ -1,19 +1,22 @@
+// app/(routes)/teamspace/[id]/chat/page.jsx
 "use client";
-import { useTeamspaceContext } from "@/providers/TeamspaceProvider";
+import React from "react";
+import { useParams } from "next/navigation";
+import ChatSection from "../components/ChatSection";
 
 export default function ChatPage() {
-    const { teamspace, isLoading, activeTab, setActiveTab } =
-        useTeamspaceContext();
-
-    if (isLoading) return <p>Loading...</p>;
+    const params = useParams();
+    const teamspaceId = params.id;
 
     return (
-        <div>
-            <h1>Chat — {teamspace?.teamspaceName}</h1>
-            <p>Owner: {teamspace?.OwnerId?.name}</p>
-            <button onClick={() => setActiveTab("chat")}>
-                Switch Active Tab
-            </button>
+        <div className="p-6 min-h-screen bg-gray-900 text-white">
+            <h1 className="text-2xl font-bold mb-6">
+                💬 Teamspace Chat — {teamspaceId}
+            </h1>
+
+            <div className="bg-white text-black rounded-2xl shadow-xl p-4">
+                <ChatSection teamspaceId={teamspaceId} />
+            </div>
         </div>
     );
 }
