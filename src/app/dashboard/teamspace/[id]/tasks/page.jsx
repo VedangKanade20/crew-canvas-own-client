@@ -10,18 +10,30 @@ import {
 import TaskInputBox from "../components/TaskInputBox";
 import TaskList from "../components/TaskList";
 import toast from "react-hot-toast";
-import { useAuth } from "@/context/AuthContext"; // assuming you have this
+import { useTeamspaceContext } from "@/providers/TeamspaceProvider";
+import { useMemo } from "react";
 
 export default function TasksSection() {
     const { id: teamspaceId } = useParams();
     const { user } = useAuth();
+    const { teamspace } = useTeamspaceContext();
 
     const { data: tasks, isLoading } = useTasks(teamspaceId);
     const createTask = useCreateTask(teamspaceId);
     const toggleStatus = useToggleTaskStatus(teamspaceId);
     const deleteTask = useDeleteTask(teamspaceId);
 
-    const isAdmin = user?.role === "admin" || user?._id === tasks?.ownerId;
+    const isAdmin = useMemo(() => {
+        if (!user || !teamspace) return false;
+        const member = teamspace.members?.find(
+            (m) => (m.user?._id || m.user) === user._id
+        );
+        return (
+            member?.role === "admin" ||
+            teamspace.OwnerId === user._id ||
+            user.role === "admin"
+        );
+    }, [user, teamspace]);
 
     const handleCreate = async (taskData) => {
         try {

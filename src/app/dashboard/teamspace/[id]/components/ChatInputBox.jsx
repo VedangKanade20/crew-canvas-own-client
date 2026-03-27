@@ -1,30 +1,18 @@
 // components/ChatInputBox.jsx
 "use client";
-import React, { useState, useEffect } from "react";
-import { useAddMessage } from "@/hooks/useChat";
+import React, { useState } from "react";
 
 export default function ChatInputBox({ socket, teamspaceId }) {
     const [content, setContent] = useState("");
-    const addMessage = useAddMessage(teamspaceId);
-
-    useEffect(() => {
-        if (!socket) return;
-
-        // ✅ Listen for new incoming messages
-        socket.on("receiveMessage", (newMsg) => {
-            console.log("📩 Received message:", newMsg);
-            addMessage.mutate(newMsg);
-        });
-
-        return () => socket.off("receiveMessage");
-    }, [socket]);
 
     const handleSend = (e) => {
         e.preventDefault();
         if (!content.trim()) return;
 
         // ✅ Emit socket event
-        socket.emit("sendMessage", { teamspaceId, content });
+        if (socket) {
+            socket.emit("sendMessage", { teamspaceId, content });
+        }
         setContent("");
     };
 
@@ -48,4 +36,3 @@ export default function ChatInputBox({ socket, teamspaceId }) {
         </form>
     );
 }
-

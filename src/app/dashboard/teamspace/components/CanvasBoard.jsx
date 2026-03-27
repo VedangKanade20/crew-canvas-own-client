@@ -6,79 +6,64 @@ import io from "socket.io-client";
 import debounce from "lodash.debounce";
 import { useGetCanvas, useUpdateCanvas } from "@/hooks/useCanvas";
 import toast from "react-hot-toast";
+import "@excalidraw/excalidraw/dist/excalidraw.min.css";
 
 const Excalidraw = dynamic(
     () => import("@excalidraw/excalidraw").then((m) => m.Excalidraw),
     { ssr: false }
 );
 
-// ⚡ Keep socket outside so it doesn't reinit on each render
-let socket;
-
 // Function to scale down scene elements
-const scaleScene = (scene, scaleFactor = 0.3) => {
-    if (!scene || !scene.elements) return scene;
-    return {
-        ...scene,
-        elements: scene.elements.map((element) => ({
-            ...element,
-            x: element.x * scaleFactor,
-            y: element.y * scaleFactor,
-            width: element.width ? element.width * scaleFactor : undefined,
-            height: element.height ? element.height * scaleFactor : undefined,
-            points: element.points
-                ? element.points.map((point) => [
-                      point[0] * scaleFactor,
-                      point[1] * scaleFactor,
-                  ])
-                : undefined,
-        })),
-    };
-};
 
 export default function CanvasBoard({ teamspaceId, userId }) {
     const excalidrawRef = useRef(null);
+    const socketRef = useRef(null);
     const [isReady, setIsReady] = useState(false);
 
     const { data, isLoading } = useGetCanvas(teamspaceId);
     const updateCanvasMutation = useUpdateCanvas(teamspaceId);
 
-    // 🎯 Initialize socket once
+    // 🎯 Initialize socket once per teamspace and clean up properly
     useEffect(() => {
         if (!teamspaceId) return;
-        if (!socket) {
-            socket = io(process.env.NEXT_PUBLIC_API_URL, {
-                withCredentials: true,
-            });
-        }
 
-        socket.emit("canvas_join", { teamspaceId, userId });
+        const socketClient = io(process.env.NEXT_PUBLIC_API_URL || "/", {
+            withCredentials: true,
+            transports: ["websocket"],
+        });
 
-        socket.on("canvas_update", (payload) => {
+        socketRef.current = socketClient;
+        socketClient.emit("canvas_join", { teamspaceId, userId });
+
+        socketClient.on("canvas_update", (payload) => {
             if (!payload || payload.sender === userId) return;
-            const scene = scaleScene(payload.scene); // Scale incoming scene
-            if (excalidrawRef.current && scene) {
-                excalidrawRef.current.updateScene(scene);
+            if (excalidrawRef.current && payload.scene) {
+                excalidrawRef.current.updateScene(payload.scene);
             }
         });
 
+        socketClient.on("connect_error", (err) => {
+            console.error("Canvas socket connection error:", err);
+            toast.error("Unable to connect to canvas server.");
+        });
+
         return () => {
-            socket.off("canvas_update");
-            socket.emit("canvas_leave", { teamspaceId, userId });
+            socketClient.emit("canvas_leave", { teamspaceId, userId });
+            socketClient.off("canvas_update");
+            socketClient.off("connect_error");
+            socketClient.disconnect();
+            socketRef.current = null;
         };
     }, [teamspaceId, userId]);
 
     // 🧩 Load initial data from backend
     useEffect(() => {
         if (!isLoading && data) {
-            const scene =
-                data?.canvas?.canvasData ||
+            const scene = data?.canvas?.canvasData ||
                 data?.canvasData ||
-                data?.scene ||
-                null;
-            const scaledScene = scene ? scaleScene(scene) : null; // Scale initial scene
-            if (scaledScene && excalidrawRef.current) {
-                excalidrawRef.current.updateScene(scaledScene);
+                data?.scene || { elements: [], appState: {} };
+            if (excalidrawRef.current && scene) {
+                excalidrawRef.current.updateScene(scene);
             }
             setIsReady(true);
         }
@@ -101,17 +86,16 @@ export default function CanvasBoard({ teamspaceId, userId }) {
     const onChange = useCallback(
         (elements, state) => {
             const scene = { elements, appState: state };
-            const scaledScene = scaleScene(scene); // Scale before broadcasting and saving
 
-            if (socket && teamspaceId) {
-                socket.emit("canvas_update", {
+            if (socketRef.current && teamspaceId) {
+                socketRef.current.emit("canvas_update", {
                     teamspaceId,
-                    scene: scaledScene,
+                    scene,
                     sender: userId,
                 });
             }
 
-            debouncedSave(scaledScene);
+            debouncedSave(scene);
         },
         [debouncedSave, teamspaceId, userId]
     );
@@ -119,17 +103,19 @@ export default function CanvasBoard({ teamspaceId, userId }) {
     // 💾 Manual save (button)
     const handleManualSave = async () => {
         if (!excalidrawRef.current) return;
-        const scene = excalidrawRef.current.getSceneElements
-            ? {
-                  elements: excalidrawRef.current.getSceneElements(),
-                  appState: {},
-              }
-            : null;
-        const scaledScene = scene ? scaleScene(scene) : null;
-        if (scaledScene) {
-            await updateCanvasMutation.mutateAsync(scaledScene);
-            toast.success("Canvas manually saved");
-        }
+
+        const elements =
+            typeof excalidrawRef.current.getSceneElements === "function"
+                ? excalidrawRef.current.getSceneElements()
+                : [];
+        const appState =
+            typeof excalidrawRef.current.getAppState === "function"
+                ? excalidrawRef.current.getAppState()
+                : {};
+
+        const scene = { elements, appState };
+        await updateCanvasMutation.mutateAsync(scene);
+        toast.success("Canvas manually saved");
     };
 
     return (

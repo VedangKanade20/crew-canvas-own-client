@@ -1,29 +1,29 @@
 import api from "@/lib/api";
 
 export const getAllTeamspaces = async () => {
-    const res = await api.get("api/teamspace/get-allTeamspaces");
+    const res = await api.get("/api/teamspace/get-allTeamspaces");
     return res.data.teamspaces;
 };
 
 export const getTeamspaceById = async (teamspaceId) => {
-    const res = await api.get(`api/teamspace/getTeamspace/${teamspaceId}`);
+    const res = await api.get(`/api/teamspace/getTeamspace/${teamspaceId}`);
     return res.data;
 };
 
 export const createTeamspace = async (newTeam) => {
-    const res = await api.post("api/teamspace/create-teamspace", newTeam);
+    const res = await api.post("/api/teamspace/create-teamspace", newTeam);
     return res.data;
 };
 
 export const addMember = async ({ teamspaceId, memberId }) => {
-    const res = await api.put(`api/teamspace/${teamspaceId}/add-member`, {
+    const res = await api.put(`/api/teamspace/${teamspaceId}/add-member`, {
         memberId,
     });
     return res.data;
 };
 
 export const removeMember = async ({ teamspaceId, memberId }) => {
-    const res = await api.put(`api/teamspace/${teamspaceId}/remove-member`, {
+    const res = await api.put(`/api/teamspace/${teamspaceId}/remove-member`, {
         memberId,
     });
     return res.data;
@@ -31,13 +31,13 @@ export const removeMember = async ({ teamspaceId, memberId }) => {
 
 export const deleteTeamspace = async (teamspaceId) => {
     const res = await api.delete(
-        `api/teamspace/${teamspaceId}/delete-teamspace`
+        `/api/teamspace/${teamspaceId}/delete-teamspace`
     );
     return res.data;
 };
 
 export const joinTeamspace = async (secret) => {
-    const res = await api.post(`api/teamspace/join-teamspace`, { secret });
+    const res = await api.post(`/api/teamspace/join-teamspace`, { secret });
     return res.data;
 };
 // import api from "@/lib/api";

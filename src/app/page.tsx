@@ -1,17 +1,19 @@
 import CTA from "@/components/Cta";
 import Features from "@/components/Features";
-// import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import Testimonials from "@/components/Testimonials";
-// import Image from "next/image";
+import StatsSection from "@/components/StatsSection";
+import UseCases from "@/components/UseCases";
+import ProcessSteps from "@/components/ProcessSteps";
 
 export default function Home() {
     return (
         <>
-            <Header />
             <HeroSection />
+            <StatsSection />
+            <UseCases />
             <Features />
+            <ProcessSteps />
             <Testimonials />
             <CTA />
         </>
