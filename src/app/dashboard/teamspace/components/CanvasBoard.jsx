@@ -6,7 +6,7 @@ import io from "socket.io-client";
 import debounce from "lodash.debounce";
 import { useGetCanvas, useUpdateCanvas } from "@/hooks/useCanvas";
 import toast from "react-hot-toast";
-import "@excalidraw/excalidraw/dist/excalidraw.min.css";
+import "@excalidraw/excalidraw/index.css";
 
 const Excalidraw = dynamic(
     () => import("@excalidraw/excalidraw").then((m) => m.Excalidraw),
