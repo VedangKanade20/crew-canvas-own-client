@@ -2,7 +2,6 @@
 
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const testimonials = [
     {
@@ -117,7 +116,7 @@ const Testimonials = () => {
 
                             {/* Feedback */}
                             <p className="text-gray-300 leading-relaxed text-lg italic">
-                                "{testimonial.feedback}"
+                                &ldquo;{testimonial.feedback}&rdquo;
                             </p>
                         </div>
                     ))}

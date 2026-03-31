@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(request) {
+export function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname;
     const isPublicPath = path === "/login" || path === "/signup";
     const token = request.cookies.get("token")?.value || "";

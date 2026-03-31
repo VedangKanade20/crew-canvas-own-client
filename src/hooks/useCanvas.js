@@ -17,7 +17,7 @@ export function useUpdateCanvas(teamspaceId) {
     const qc = useQueryClient();
     return useMutation({
         mutationFn: (data) => updateCanvasData(teamspaceId, data),
-        onSuccess: (data) => {
+        onSuccess: () => {
             qc.invalidateQueries(["canvas", teamspaceId]);
         },
     });

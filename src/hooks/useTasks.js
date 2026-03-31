@@ -2,7 +2,6 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
     createTask,
     getTasksFromTeamspace,
-    updateTask,
     deleteTask,
     toggleTaskStatus,
 } from "@/services/taskService";

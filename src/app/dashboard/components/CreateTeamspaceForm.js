@@ -16,7 +16,7 @@ export default function CreateTeamspaceForm() {
       await createTeamspace({ teamspaceName: name });
       setName("");
       // show toast success
-    } catch (err) {
+    } catch {
       // show toast error
     }
   };

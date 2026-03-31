@@ -12,8 +12,6 @@ let socket;
 
 
 export const useChat = (teamspaceId, setMessages, user) => {
-    const qc = useQueryClient();
-
     // Initial fetch from backend (load chat history)
     const { data, isLoading } = useQuery({
         queryKey: ["chat", teamspaceId],
@@ -51,7 +49,7 @@ export const useChat = (teamspaceId, setMessages, user) => {
             socket.off("chat_message");
             socket.off("chat_delete");
         };
-    }, [teamspaceId, user]);
+    }, [teamspaceId, user, setMessages]);
 
     return { data, isLoading, socket };
 };
