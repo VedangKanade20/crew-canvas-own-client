@@ -2,23 +2,21 @@
 import React from "react";
 
 export default function TaskItem({ task, onToggle, onDelete }) {
-    const { _id, title, assignee, status, dueDate } = task;
+    const { _id, taskName, taskAssignedTo, taskStatus, taskDescription } = task;
 
     return (
         <div
             className={`flex justify-between items-center p-3 rounded-lg ${
-                status === "completed" ? "bg-green-700" : "bg-gray-800"
+                taskStatus === "Completed" ? "bg-green-700" : "bg-gray-800"
             }`}
         >
             <div className="flex flex-col">
-                <h3 className="text-lg font-semibold">{title}</h3>
+                <h3 className="text-lg font-semibold">{taskName}</h3>
                 <p className="text-sm text-gray-300">
-                    Assigned to: {assignee?.name || assignee}
+                    Assigned to: {taskAssignedTo?.name || taskAssignedTo}
                 </p>
-                {dueDate && (
-                    <p className="text-xs text-gray-400">
-                        Due: {new Date(dueDate).toLocaleDateString()}
-                    </p>
+                {taskDescription && (
+                    <p className="text-xs text-gray-400">{taskDescription}</p>
                 )}
             </div>
 
@@ -26,12 +24,12 @@ export default function TaskItem({ task, onToggle, onDelete }) {
                 <button
                     onClick={() => onToggle(_id)}
                     className={`px-3 py-1 rounded ${
-                        status === "completed"
+                        taskStatus === "Completed"
                             ? "bg-gray-600"
                             : "bg-blue-600 hover:bg-blue-700"
                     }`}
                 >
-                    {status === "completed" ? "Undo" : "Mark Done"}
+                    {taskStatus === "Completed" ? "Undo" : "Mark Done"}
                 </button>
                 {onDelete && (
                     <button

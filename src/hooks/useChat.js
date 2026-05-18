@@ -1,92 +1,62 @@
 "use client";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-    getChatByTeamspace,
-    addMessageToChat,
-    deleteMessage,
-} from "@/services/chatService";
-import { useEffect } from "react";
-import io from "socket.io-client";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getChatByTeamspace } from "@/services/chatService";
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
 let socket;
 
+export const useChat = (teamspaceId) => {
+    const [messages, setMessages] = useState([]);
+    const queryClient = useQueryClient();
 
-export const useChat = (teamspaceId, setMessages, user) => {
-    // Initial fetch from backend (load chat history)
     const { data, isLoading } = useQuery({
         queryKey: ["chat", teamspaceId],
         queryFn: () =>
             getChatByTeamspace(teamspaceId).then((res) => res.data.chat),
         enabled: !!teamspaceId,
         onSuccess: (chatData) => {
-            // once fetched, load initial messages into state
             setMessages(chatData?.messages || []);
         },
     });
 
-    // Setup socket connection once
     useEffect(() => {
         if (!teamspaceId) return;
 
+        const token = localStorage.getItem("token") || "";
         if (!socket) {
-            socket = io(process.env.NEXT_PUBLIC_API_URL, {
-                withCredentials: true,
-            });
+            socket = io(
+                process.env.NEXT_PUBLIC_SOCKET_URL ||
+                    process.env.NEXT_PUBLIC_API_URL,
+                {
+                    auth: { token },
+                    withCredentials: true,
+                    transports: ["websocket"],
+                }
+            );
         }
 
-        socket.emit("chat_join", { teamspaceId, userId: user?._id });
+        socket.emit("joinTeamspace", teamspaceId);
 
-        socket.on("chat_message", (newMsg) => {
+        const handleReceiveMessage = (newMsg) => {
             setMessages((prev) => [...prev, newMsg]);
-        });
+            queryClient.setQueryData(["chat", teamspaceId], (oldData) => {
+                if (!oldData) return { messages: [newMsg] };
+                return {
+                    ...oldData,
+                    messages: [...(oldData.messages || []), newMsg],
+                };
+            });
+        };
 
-        socket.on("chat_delete", (msgId) => {
-            setMessages((prev) => prev.filter((m) => m._id !== msgId));
-        });
+        socket.on("receiveMessage", handleReceiveMessage);
 
         return () => {
-            socket.emit("chat_leave", { teamspaceId, userId: user?._id });
-            socket.off("chat_message");
-            socket.off("chat_delete");
+            socket.off("receiveMessage", handleReceiveMessage);
+            socket.disconnect();
+            socket = null;
         };
-    }, [teamspaceId, user, setMessages]);
+    }, [teamspaceId, queryClient]);
 
-    return { data, isLoading, socket };
-};
-
-// ✉️ ADD MESSAGE HOOK — emits via socket and saves via API
-export const useAddMessage = (teamspaceId, socket) => {
-    const qc = useQueryClient();
-
-    return useMutation({
-        mutationFn: async (messageData) => {
-            // Emit to socket for instant UI update
-            if (socket && teamspaceId) {
-                socket.emit("chat_message", messageData);
-            }
-
-            // Persist to backend (actual DB save)
-            await addMessageToChat(teamspaceId, messageData);
-
-            return messageData;
-        },
-        onSuccess: () => qc.invalidateQueries(["chat", teamspaceId]),
-    });
-};
-
-// 🗑️ DELETE MESSAGE HOOK — emits via socket and removes from DB
-export const useDeleteMessage = (teamspaceId, socket) => {
-    const qc = useQueryClient();
-
-    return useMutation({
-        mutationFn: async (messageId) => {
-            if (socket && teamspaceId) {
-                socket.emit("chat_delete", { messageId, teamspaceId });
-            }
-
-            await deleteMessage(teamspaceId, messageId);
-            return messageId;
-        },
-        onSuccess: () => qc.invalidateQueries(["chat", teamspaceId]),
-    });
+    return { messages, isLoading, socket, chat: data };
 };

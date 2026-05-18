@@ -9,7 +9,11 @@ export default function TaskInputBox({ onCreate }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!title || !assignee) return;
-        onCreate({ title, assignee, dueDate });
+        onCreate({
+            taskName: title,
+            taskAssignedTo: assignee,
+            taskDescription: dueDate ? `Due by ${dueDate}` : "",
+        });
         setTitle("");
         setAssignee("");
         setDueDate("");

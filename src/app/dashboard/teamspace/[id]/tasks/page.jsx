@@ -7,6 +7,7 @@ import {
     useToggleTaskStatus,
     useDeleteTask,
 } from "@/hooks/useTasks";
+import { useAuth } from "@/context/AuthContext";
 import TaskInputBox from "../components/TaskInputBox";
 import TaskList from "../components/TaskList";
 import toast from "react-hot-toast";

@@ -2,10 +2,10 @@
 import api from "@/lib/api";
 
 export const getChatByTeamspace = (teamspaceId) =>
-    api.get(`api/teamspaces/${teamspaceId}/chat`);
+    api.get(`/api/teamspace/${teamspaceId}/get-chat`);
 
 export const addMessageToChat = (teamspaceId, content) =>
-    api.post(`api/teamspaces/${teamspaceId}/chat`, { content });
+    api.put(`/api/teamspace/${teamspaceId}/add-message`, { content });
 
 export const deleteMessage = (teamspaceId, messageId) =>
-    api.delete(`api/teamspaces/${teamspaceId}/chat/${messageId}`);
+    api.put(`/api/teamspace/${teamspaceId}/delete-message/${messageId}`);
