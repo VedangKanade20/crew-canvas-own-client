@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
     const path = request.nextUrl.pathname;
     const isPublicPath = path === "/login" || path === "/signup";
     const token = request.cookies.get("token")?.value || "";
